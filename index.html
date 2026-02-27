@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Syntax Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="neon">
+
+    <div class="theme-switcher">
+        <button onclick="setTheme('light')">Light</button>
+        <button onclick="setTheme('dark')">Dark</button>
+        <button onclick="setTheme('neon')">Neon</button>
+    </div>
+
+    <div class="calculator scientific">
+        <input type="text" id="display" class="display" disabled>
+        
+        <div class="keypad">
+            <button class="sci" onclick="appendInput('sin(')">sin</button>
+            <button class="sci" onclick="appendInput('cos(')">cos</button>
+            <button class="sci" onclick="appendInput('tan(')">tan</button>
+            <button class="operator" onclick="clearDisplay()">C</button>
+            <button class="operator" onclick="deleteLast()">DEL</button>
+
+            <button class="sci" onclick="appendInput('asin(')">sin⁻¹</button>
+            <button class="sci" onclick="appendInput('acos(')">cos⁻¹</button>
+            <button class="sci" onclick="appendInput('atan(')">tan⁻¹</button>
+            <button onclick="appendInput('(')">(</button>
+            <button class="operator" onclick="appendInput('%')">%</button>
+
+            <button class="sci" onclick="appendInput('log(')">log</button>
+            <button class="sci" onclick="appendInput('ln(')">ln</button>
+            <button class="sci" onclick="appendInput('e')">e</button>
+            <button onclick="appendInput(')')">)</button>
+            <button class="operator" onclick="appendInput('/')">/</button>
+
+            <button class="sci" onclick="appendInput('^')">^</button>
+            <button onclick="appendInput('7')">7</button>
+            <button onclick="appendInput('8')">8</button>
+            <button onclick="appendInput('9')">9</button>
+            <button class="operator" onclick="appendInput('*')">*</button>
+
+            <button class="sci" onclick="appendInput('√(')">√</button>
+            <button onclick="appendInput('4')">4</button>
+            <button onclick="appendInput('5')">5</button>
+            <button onclick="appendInput('6')">6</button>
+            <button class="operator" onclick="appendInput('-')">-</button>
+
+            <button class="sci" onclick="appendInput('π')">π</button> 
+            <button onclick="appendInput('1')">1</button>
+            <button onclick="appendInput('2')">2</button>
+            <button onclick="appendInput('3')">3</button>
+            <button class="operator" onclick="appendInput('+')">+</button>
+
+            <button id="deg-btn" class="sci" onclick="toggleDegRad()">DEG</button>
+            <button onclick="appendInput('00')">00</button>
+            <button onclick="appendInput('0')">0</button>
+            <button onclick="appendInput('.')">.</button>
+            <button class="equals" style="grid-column: span 1;" onclick="calculate()">=</button>
+            
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
