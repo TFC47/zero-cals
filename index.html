@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="ZeroCals — a scientific calculator with keyboard support, history, memory, and multiple themes.">
+    <title>ZeroCals — Scientific Calculator</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>∑</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light">
+
+    <div class="app">
+        <header class="topbar">
+            <div class="brand">Zero<span>Cals</span></div>
+            <div class="topbar-controls">
+                <div class="segmented" role="group" aria-label="Calculator mode">
+                    <button id="basic-btn" class="pill" aria-pressed="true">Basic</button>
+                    <button id="sci-btn" class="pill" aria-pressed="false">Sci</button>
+                </div>
+                <button id="angle-btn" class="pill" aria-label="Toggle degrees or radians">DEG</button>
+                <button id="sound-btn" class="pill" aria-pressed="true" aria-label="Toggle key click sound">Sound</button>
+                <button id="history-btn" class="pill" aria-label="Toggle calculation history">History</button>
+            </div>
+        </header>
+
+        <div class="workspace">
+        <div class="calculator scientific">
+            <div class="display-wrap">
+                <div class="expr-line" id="expr-line" aria-label="Current expression"></div>
+                <div class="result-line" id="result-line" aria-label="Result">0</div>
+                <div class="memory-badge" id="memory-badge" hidden>M</div>
+                <div class="angle-badge" id="angle-badge">DEG</div>
+            </div>
+
+            <div class="calc-keys" id="calc-keys">
+                <div class="keypad" id="keypad">
+                    <!-- Common scientific -->
+                    <button class="key sci" data-key="√(">√</button>
+                    <button class="key sci" data-key="^">xʸ</button>
+                    <button class="key" data-key="(">(</button>
+                    <button class="key" data-key=")">)</button>
+                    <button class="key operator" data-key="%">%</button>
+
+                    <!-- Digits & operators -->
+                    <button class="key" data-key="7">7</button>
+                    <button class="key" data-key="8">8</button>
+                    <button class="key" data-key="9">9</button>
+                    <button class="key operator" data-key="/">÷</button>
+                    <button class="key operator" data-key="*">×</button>
+
+                    <button class="key" data-key="4">4</button>
+                    <button class="key" data-key="5">5</button>
+                    <button class="key" data-key="6">6</button>
+                    <button class="key operator" data-key="-">−</button>
+                    <button class="key operator" data-key="+">+</button>
+
+                    <button class="key" data-key="1">1</button>
+                    <button class="key" data-key="2">2</button>
+                    <button class="key" data-key="3">3</button>
+                    <button class="key" data-key="00">00</button>
+                    <button class="key" data-key=".">.</button>
+
+                    <button class="key sci" data-action="ans">Ans</button>
+                    <button class="key" data-key="0">0</button>
+                    <button class="key util" data-action="del">DEL</button>
+                    <button class="key util danger" data-action="clear">C</button>
+                    <button class="key equals" data-action="equals">=</button>
+                </div>
+
+                <div class="extra-rows" id="extra-rows">
+                    <div class="extra-inner">
+                        <!-- Memory -->
+                        <button class="key sci util" data-action="mc" aria-label="Memory clear">MC</button>
+                        <button class="key sci util" data-action="mr" aria-label="Memory recall">MR</button>
+                        <button class="key sci util" data-action="mplus" aria-label="Memory add">M+</button>
+                        <button class="key sci util" data-action="mminus" aria-label="Memory subtract">M−</button>
+                        <button class="key sci util" data-action="ms" aria-label="Memory store">MS</button>
+
+                        <!-- Trig -->
+                        <button class="key sci" data-key="sin(">sin</button>
+                        <button class="key sci" data-key="cos(">cos</button>
+                        <button class="key sci" data-key="tan(">tan</button>
+                        <button class="key sci" data-key="asin(">sin⁻¹</button>
+                        <button class="key sci" data-key="acos(">cos⁻¹</button>
+
+                        <button class="key sci" data-key="atan(">tan⁻¹</button>
+                        <button class="key sci" data-key="log(">log</button>
+                        <button class="key sci" data-key="ln(">ln</button>
+                        <button class="key sci" data-key="e">e</button>
+                        <button class="key sci" data-key="π">π</button>
+
+                        <button class="key sci" data-key="e">EXP</button>
+                        <button class="key sci" data-key="φ">φ</button>
+                        <button class="key sci" data-key="τ">τ</button>
+                        <button class="key sci" data-key="^2">x²</button>
+                        <button class="key sci" data-action="negate">±</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <aside id="history-panel" class="history-panel" aria-live="polite">
+            <div class="history-head">
+                <span>History</span>
+                <button id="clear-history" aria-label="Clear history">Clear</button>
+            </div>
+            <div id="history-list" class="history-list"></div>
+        </aside>
+        </div>
+
+        <div class="theme-switcher" role="group" aria-label="Theme">
+            <button data-theme="light">Light</button>
+            <button data-theme="dark">Dark</button>
+            <button data-theme="neon">Neon</button>
+        </div>
+
+        <p class="key-hints">
+            <kbd>Enter</kbd> equals · <kbd>Esc</kbd> clear · <kbd>⌫</kbd> delete ·
+            <kbd>P</kbd> π · <kbd>S</kbd> √ · <kbd>E</kbd> exponent · click result to copy
+        </p>
+    </div>
+
+    <div id="toast" class="toast" role="status"></div>
+
+    <script src="math-parser.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
